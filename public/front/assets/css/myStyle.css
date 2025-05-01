@@ -1,0 +1,199 @@
+* {
+    outline: none;
+}
+
+.searchForm {
+    /* border: 4px solid green; */
+    width: 45%;
+}
+
+
+body {
+    overflow: hidden;
+    /* background-color: #f6f6f6; */
+}
+
+.header {
+    position: fixed;
+    z-index: 999999999;
+    width: 100%;
+}
+
+
+.searchForm * {
+    font-size: 14px;
+}
+
+.searchForm select {
+    border-radius: 20px;
+}
+
+.searchForm button {
+    border-radius: 20px;
+}
+
+.menu_items {
+    position: relative;
+}
+
+.menu_items div:nth-of-type(1) {
+    position: absolute;
+}
+
+.primaryColor {
+    color: white;
+    background-color: black;
+}
+
+.backImage {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+.mainColor {
+    color: rgb(72, 72, 72);
+}
+
+.primaryColor:hover {
+    color: white;
+    background-color: black;
+}
+
+.main_menu {
+    background-color: white;
+    color: rgb(218 165 32);
+}
+
+.bottom_menu {
+    position: fixed;
+    bottom: 0%;
+    width: 100%;
+}
+
+main {
+    overflow: hidden;
+}
+
+.card {
+    direction: rtl;
+}
+
+.cartBtn {
+    position: absolute;
+    left: 0px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.card img {
+    max-height: 120px;
+    height: 120px;
+    width: 130px;
+    margin: 10px auto;
+}
+
+.itemImage {
+    max-height: 300px;
+    height: 300px;
+    width: 300px;
+    margin: 20px auto;
+}
+
+.navImage {
+    max-height: 80px;
+    height: 80px;
+    width: 100px;
+    margin: 20px auto;
+}
+
+.cartImage {
+    margin: 20px auto;
+}
+
+.card:hover {
+    background: linear-gradient(180deg,
+            black 10%,
+            rgb(255, 255, 255) 90%);
+}
+
+.card:hover .card-body {
+    background-color: white;
+    border-radius: 10px;
+
+}
+
+.card-body p,
+.card-body h6 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contact {
+    position: fixed;
+    bottom: 22px;
+    right: 10px;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 0px 0px 5px #ccc;
+    color: black;
+    text-decoration: none;
+
+}
+
+.loaderk {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    color: black;
+    z-index: 9999999999999999999;
+}
+
+.loaderk i {
+    font-size: 50px;
+}
+
+.contact:hover {
+    color: rgb(29, 176, 32);
+}
+
+.btnMethod:hover {
+    border: 10px solid red;
+}
+
+.product {
+    border: 1px solid #f6f6f6;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 2px 2px 15px #ccc;
+    padding: 10px 0px;
+}
+
+.product:hover {
+
+    border: 1px solid black;
+}
+
+.product .productName {
+    color: black;
+    font-weight: 500;
+    text-align: center;
+}
+
+.product .proudctShop {
+    position: absolute;
+    background-color: black;
+    color: white;
+    bottom: 10px;
+    left: 0px;
+    padding: 3px;
+}
+
+.product img {
+    max-height: 100%;
+    max-width: 100%;
+}
