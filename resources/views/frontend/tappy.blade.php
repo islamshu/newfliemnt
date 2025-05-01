@@ -123,38 +123,118 @@
                     </div>
                 </div>
 
-                <form action="{{ route('process.tappy', ['totalPrice' => $totalPrice]) }}" method="POST" class="pb-2">
+                <form action="{{ route('process.tappy', ['totalPrice' => $totalPrice]) }}" method="POST" class="pb-2" id="paymentForm">
                     @csrf
                     <div class="row">
+                        <!-- اسم حامل البطاقة -->
                         <div class="col-lg-8">
-                            <input type="text" class="form-control mb-3 text-center" name="CardName" id="name" autocomplete="off" required placeholder="الأسم على البطاقة">
+                            <input 
+                                type="text" 
+                                class="form-control mb-3 text-center" 
+                                name="CardName" 
+                                id="name" 
+                                autocomplete="off" 
+                                required
+                                pattern="[A-Za-z\u0600-\u06FF\s]+" 
+                                title="يجب إدخال اسم صحيح (حروف عربية/إنجليزية فقط)"
+                                placeholder="الأسم على البطاقة"
+                            >
+                            <small class="text-danger d-none" id="nameError">يجب إدخال اسم صحيح</small>
                         </div>
-
+                
+                        <!-- تاريخ الانتهاء و CVV -->
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="container">
                                 <div class="row border rounded" style="overflow: hidden;">
+                                    <!-- الشهر -->
                                     <div class="col-4 px-0 mx-0">
-                                        <input type="text" class="form-control border-0" maxlength="2" name="month" required id="month" placeholder="الشهر">
+                                        <input 
+                                            type="text" 
+                                            class="form-control border-0" 
+                                            maxlength="2" 
+                                            name="month" 
+                                            required 
+                                            id="month" 
+                                            placeholder="الشهر"
+                                            pattern="(0[1-9]|1[0-2])" 
+                                            title="يجب أن يكون الشهر بين 01 و 12"
+                                            inputmode="numeric"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                        >
                                     </div>
+                                    <!-- السنة -->
                                     <div class="col-4 px-0 mx-0">
-                                        <input type="text" class="form-control border border-right-0 border-top-0 border-left border-bottom-0 rounded-0" maxlength="2" name="year" required id="year" placeholder="السنة">
+                                        <input 
+                                            type="text" 
+                                            class="form-control border border-right-0 border-top-0 border-left border-bottom-0 rounded-0" 
+                                            maxlength="2" 
+                                            name="year" 
+                                            required 
+                                            id="year" 
+                                            placeholder="السنة"
+                                            pattern="\d{2}" 
+                                            title="أخر رقمين من السنة (مثال: 25 لسنة 2025)"
+                                            inputmode="numeric"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                        >
                                     </div>
+                                    <!-- CVV -->
                                     <div class="col-4 px-0 mx-0">
-                                        <input type="text" class="form-control border border-right-0 border-top-0 border-left border-bottom-0 rounded-0" maxlength="3" name="cvc" required id="cvc" placeholder="CVV">
+                                        <input 
+                                            type="text" 
+                                            class="form-control border border-right-0 border-top-0 border-left border-bottom-0 rounded-0" 
+                                            maxlength="3" 
+                                            name="cvc" 
+                                            required 
+                                            id="cvc" 
+                                            placeholder="CVV"
+                                            pattern="\d{3}" 
+                                            title="يجب أن يتكون من 3 أرقام"
+                                            inputmode="numeric"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                        >
                                     </div>
                                 </div>
+                                <small class="text-danger d-none" id="dateError">تاريخ انتهاء البطاقة غير صحيح</small>
+                                <small class="text-danger d-none" id="cvvError">CVV يجب أن يتكون من 3 أرقام</small>
                             </div>
                         </div>
-
+                
+                        <!-- رقم البطاقة -->
                         <div class="col-lg-8">
-                            <input type="text" name="cardNumber" class="form-control rounded mb-3 mt-lg-0 mt-3 text-center" id="cardNumber" autocomplete="off" required placeholder="رقم البطاقة" maxlength="16">
+                            <input 
+                                type="text" 
+                                name="cardNumber" 
+                                class="form-control rounded mb-3 mt-lg-0 mt-3 text-center" 
+                                id="cardNumber" 
+                                autocomplete="off" 
+                                required 
+                                placeholder="رقم البطاقة" 
+                                maxlength="16"
+                                pattern="\d{16}" 
+                                title="يجب أن يتكون رقم البطاقة من 16 رقمًا"
+                                inputmode="numeric"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            >
+                            <small class="text-danger d-none" id="cardError">رقم البطاقة يجب أن يتكون من 16 رقمًا</small>
                         </div>
                     </div>
-
+                
+                    <!-- زر الإرسال -->
                     <div class="mb-3 mt-3">
                         <button type="submit" class="w-100 btn btn-confirm rounded-4 py-2" name="mybtn" id="codeConfirm">اكمال الدفع</button>
                     </div>
                 </form>
+                
+                <!-- JavaScript للتحقق من الصحة -->
+              
+                
+                <!-- تنسيقات CSS -->
+                <style>
+                .is-invalid {
+                    border-color: #dc3545 !important;
+                }
+                </style>
             </div>
 
             <div class="col-md-5 col-11 px-4 py-3 my-md-5 my-3 main-confirm" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;background-color:white;border-radius:15px;margin-bottom:20px ! important;margin-top:0 !important">
@@ -180,5 +260,87 @@
     <i class="fab fa-whatsapp text-white my-1 fa-2x"></i>
 </a>
 
-<script src="{{ asset('assets/js/bootstrap.js') }}"></script>
+<script src="{{ asset('front/assets/js/bootstrap.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('paymentForm');
+        
+        form.addEventListener('submit', function(e) {
+            let isValid = true;
+            
+            // التحقق من اسم حامل البطاقة
+            const nameInput = document.getElementById('name');
+            const nameError = document.getElementById('nameError');
+            if (!nameInput.value.trim() || !/^[A-Za-z\u0600-\u06FF\s]+$/.test(nameInput.value)) {
+                isValid = false;
+                nameInput.classList.add('is-invalid');
+                nameError.classList.remove('d-none');
+            } else {
+                nameInput.classList.remove('is-invalid');
+                nameError.classList.add('d-none');
+            }
+    
+            // التحقق من رقم البطاقة
+            const cardInput = document.getElementById('cardNumber');
+            const cardError = document.getElementById('cardError');
+            if (!cardInput.value || !/^\d{16}$/.test(cardInput.value)) {
+                isValid = false;
+                cardInput.classList.add('is-invalid');
+                cardError.classList.remove('d-none');
+            } else {
+                cardInput.classList.remove('is-invalid');
+                cardError.classList.add('d-none');
+            }
+    
+            // التحقق من تاريخ الانتهاء
+            const monthInput = document.getElementById('month');
+            const yearInput = document.getElementById('year');
+            const dateError = document.getElementById('dateError');
+            
+            const month = parseInt(monthInput.value);
+            const year = parseInt(yearInput.value);
+            const currentYear = new Date().getFullYear() % 100;
+            const currentMonth = new Date().getMonth() + 1;
+            
+            if (!monthInput.value || !yearInput.value || 
+                month < 1 || month > 12 || 
+                year < currentYear || (year === currentYear && month < currentMonth)) {
+                isValid = false;
+                monthInput.classList.add('is-invalid');
+                yearInput.classList.add('is-invalid');
+                dateError.classList.remove('d-none');
+            } else {
+                monthInput.classList.remove('is-invalid');
+                yearInput.classList.remove('is-invalid');
+                dateError.classList.add('d-none');
+            }
+    
+            // التحقق من CVV
+            const cvvInput = document.getElementById('cvc');
+            const cvvError = document.getElementById('cvvError');
+            if (!cvvInput.value || !/^\d{3}$/.test(cvvInput.value)) {
+                isValid = false;
+                cvvInput.classList.add('is-invalid');
+                cvvError.classList.remove('d-none');
+            } else {
+                cvvInput.classList.remove('is-invalid');
+                cvvError.classList.add('d-none');
+            }
+    
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
+    
+        // إضافة تحقق أثناء الكتابة
+        const inputs = form.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('is-invalid');
+                const errorElement = document.getElementById(this.id + 'Error');
+                if (errorElement) errorElement.classList.add('d-none');
+            });
+        });
+    });
+    </script>
 </body>
