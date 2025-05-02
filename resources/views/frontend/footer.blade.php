@@ -6,7 +6,7 @@
             <div class="col-lg-3 col-md-4 col-12 mb-3">
                 <div class="d-flex  justify-content-start w-100 py-3">
                     <a href="index-2.html">
-                        <img loading="lazy" class="ms-auto me-auto" src="{{ asset('front/uploads/alb.png') }}"
+                        <img loading="lazy" class="ms-auto me-auto" src="{{ asset('storage/'.get_general_value('web_logo')) }}"
                             width="180" alt="">
                     </a>
                 </div>
