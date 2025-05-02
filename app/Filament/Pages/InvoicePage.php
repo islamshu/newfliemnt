@@ -7,6 +7,7 @@ use App\Models\Order;
 class InvoicePage extends Page
 {
     public static string $view = 'filament.pages.invoice'; // Optional: If you want a custom view.
+    protected static bool $shouldRegisterNavigation = false;
 
     public $order; // Define a property to hold the order data
 
