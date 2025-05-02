@@ -12,8 +12,8 @@
 
         <x-filament::card>
             <div class="text-center">
-                <h2 class="text-xl font-bold mb-2">طلبات جديدة</h2>
-                <p class="text-3xl text-primary-600">5</p>
+                <h2 class="text-xl font-bold mb-2">طلبات </h2>
+                <p class="text-3xl text-primary-600">{{App\Models\Order::count()}}</p>
             </div>
         </x-filament::card>
 
