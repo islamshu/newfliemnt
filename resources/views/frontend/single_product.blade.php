@@ -185,7 +185,7 @@
         }
 
         .minH2 {
-            height: 880px;
+            height: -100px;
         }
 
         .breadcrumb {
@@ -318,16 +318,9 @@
 
                    
                     <div class="row">
-                        @if($product->discount != 0)
-                        <div class="col-6 text-end text-danger">
-                        <del> {{$product->price}} {{get_general_value('currancy')}}  </del>
-                        </div>
-                        @endif
                 </div>  
                         <div class="row my-3">
-                            <div class="col-6">
-                                <input type="text" class="form-control" style="border-radius: 0;" placeholder="ادخل اللون المطلوب">
-                            </div>
+
                         </div>
                         <form action="{{route('cart.store')}}" method="POST" style="width: 100%; padding:0 !important">
                             @csrf
@@ -349,11 +342,6 @@
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <!-- <div class="col-2">
-                                    <button class="btn btn-outline-warning w-100">
-                                        <i class="fas fa-heart "></i>
-                                    </button>
-                                </div> -->
                                 <div class="col-12">
                                     <button type="submit" name="addCart" class="btn primaryColor w-100">أضف إلى السلة</button>
                                 </div>
@@ -364,7 +352,7 @@
 
 
 
-                <div class="product-comments pt-4 border" style="margin-top: -155px;border-top:2px solid #00baf2 !important;position:relative">
+<div class="product-comments pt-4 border" style="margin-top: 60px; border-top:2px solid #00baf2 !important; position:relative">
                     <span style="position: absolute;top:-41px;right:-1px;background-color:#00baf2;color:white;padding:8px 26px;border-top-left-radius:5px;border-top-right-radius:5px;">تقيمات المنتج</span>
                     <div class="product-comment mb-3 pb-4">
                         <div class="row">
@@ -484,7 +472,7 @@
                                         <i class="fa-solid fa-star" style="color: gold;"></i>
                                         <i class="fa-solid fa-star" style="color: gold;"></i>
                                         <i class="fa-solid fa-star" style="color: gold;"></i>
-                                        <i class="fa-solid fa-star" style="color: gold;"></i>
+                                        <i class="fa-solid fa-star" style="color: gold;"></i>-
                                     </div>
                                     <p class="text-body" style="font-size: 14px;">من افضل المتاجر اللي تعاملت معاها
 

@@ -24,10 +24,10 @@ class OrderResource extends Resource
 
     // تسمية التنقل
     protected static ?string $navigationLabel = 'الطلبات';
-    
+
     // تسمية نموذج البيانات المفرد
     protected static ?string $modelLabel = 'الطلب';
-    
+
     // تسمية نموذج البيانات الجمع
     protected static ?string $pluralModelLabel = 'الطلبات';
 
@@ -38,38 +38,38 @@ class OrderResource extends Resource
             ->columns([
                 // عمود لعرض رمز الطلب
                 TextColumn::make('code')->searchable()->label('رمز الطلب'),
-                
+
                 // عمود لعرض اسم العميل
                 TextColumn::make('name')->label('اسم العميل'),
-                                
+
                 // عمود لعرض رقم الهاتف
                 TextColumn::make('phone')->label('رقم الهاتف'),
-                                
+
                 // عمود لعرض البريد الإلكتروني
                 TextColumn::make('email')->label('البريد الإلكتروني'),
-                                
+
                 // عمود لعرض المبلغ المدفوع
-                TextColumn::make('payment')->label('المبلغ المدفوع')   ->suffix(' ' . get_general_value('currancy')),
+                TextColumn::make('payment')->label('المبلغ المدفوع')->suffix(' ' . get_general_value('currancy')),
                 TextColumn::make('payment_getway')
-                ->label('طريقة الدفع')
-                ->formatStateUsing(function ($state) {
-                    return match ($state) {
-                        'all' => 'كامل',
-                        'installment' => 'تقسيط',
-                        default => $state, // افتراضيًا إذا لم تكن القيمة معروفة
-                    };
-                }),
+                    ->label('طريقة الدفع')
+                    ->formatStateUsing(function ($state) {
+                        return match ($state) {
+                            'all' => 'كامل',
+                            'installment' => 'تقسيط',
+                            default => $state, // افتراضيًا إذا لم تكن القيمة معروفة
+                        };
+                    }),
                 TextColumn::make('CashOrBatch')->label('فترة التقسيط')->formatStateUsing(function ($state) {
                     return match ($state) {
-                        
+
                         '0' => '_',
-                        
+
                         default => $state, // افتراضيًا إذا لم تكن القيمة معروفة
                     };
                 }),
                 TextColumn::make('first_batch')
-                ->label('الدفعة الأولى')
-              
+                    ->label('الدفعة الأولى')
+
 
 
             ])
@@ -77,11 +77,16 @@ class OrderResource extends Resource
                 // إجراء لعرض تفاصيل الطلب
                 \Filament\Tables\Actions\ViewAction::make(),
                 Action::make('عرض الفاتورة')
-        ->label('عرض الفاتورة')
-        ->icon('heroicon-o-document-text')
-        ->url(fn ($record) => route('invoice.show', $record)) // تأكد أن لديك هذا الراوت
-        ->openUrlInNewTab(),
-      
+                    ->label('عرض الفاتورة')
+                    ->icon('heroicon-o-document-text')
+                    ->url(fn($record) => route('invoice.show', $record)) // تأكد أن لديك هذا الراوت
+                    ->openUrlInNewTab(),
+                Action::make('عقد التقسيط ')
+                    ->label('عقد التقسيط ')
+                    ->icon('heroicon-o-document-text')
+                    ->url(fn($record) => route('invoice.contact', $record->code)) // تأكد أن لديك هذا الراوت
+                    ->openUrlInNewTab(),
+
                 \Filament\Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
@@ -104,7 +109,7 @@ class OrderResource extends Resource
         return [
             // صفحة عرض القائمة الرئيسية
             'index' => Pages\ListOrders::route('/'),
-            
+
             // صفحة عرض تفاصيل الطلب
             'view' => Pages\ViewOrder::route('/{record}'),
             // صفحة مخصصة
