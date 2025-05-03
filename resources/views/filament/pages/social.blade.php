@@ -15,7 +15,7 @@
 
                     <!-- Contact Info -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="email" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="email" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             البريد الإلكتروني
                         </label>
                         <div class="md:col-span-2">
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="phone" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="phone" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             رقم الهاتف
                         </label>
                         <div class="md:col-span-2">
@@ -40,20 +40,21 @@
 
                     <!-- Social Media -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="facebook" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="facebook" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             فيسبوك
                         </label>
                         <div class="md:col-span-2">
                             <input type="text" id="facebook" name="general[facebook]"
                                 value="{{ get_general_value('facebook') ?? old('general.facebook') }}"
-                                class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                                class="block w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-900 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                                 placeholder="رابط صفحة الفيسبوك">
                         </div>
                     </div>
 
+
                     <!-- باقي روابط السوشيال ميديا بنفس الطريقة -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="twitter" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="twitter" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             تويتر
                         </label>
                         <div class="md:col-span-2">
@@ -66,7 +67,7 @@
 
                     <!-- WhatsApp -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="whatsapp" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="whatsapp" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             واتساب
                         </label>
                         <div class="md:col-span-2">
@@ -79,7 +80,7 @@
 
                     <!-- Instagram -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="instagram" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="instagram" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             انستغرام
                         </label>
                         <div class="md:col-span-2">
@@ -92,7 +93,7 @@
 
                     <!-- YouTube -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="youtube" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="youtube" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             يوتيوب
                         </label>
                         <div class="md:col-span-2">
@@ -105,7 +106,7 @@
 
                     <!-- Snapchat -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="snapchat" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="snapchat" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             سناب شات
                         </label>
                         <div class="md:col-span-2">
@@ -118,7 +119,7 @@
 
                     <!-- TikTok -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="tiktok" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="tiktok" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             تيك توك
                         </label>
                         <div class="md:col-span-2">

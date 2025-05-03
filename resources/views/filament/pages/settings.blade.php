@@ -13,7 +13,7 @@
                     
                     <!-- Website Basic Info -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="website_name" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="website_name" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             اسم الموقع (عربي)
                         </label>
                         <div class="md:col-span-2">
@@ -25,7 +25,7 @@
                     </div>
                 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="website_name_en" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="website_name_en" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             اسم الموقع (إنجليزي)
                         </label>
                         <div class="md:col-span-2">
@@ -38,7 +38,7 @@
                 
                     <!-- Website Logo -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="web_logo" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="web_logo" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             شعار الموقع
                         </label>
                         <div class="md:col-span-2">
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="segnature" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="segnature" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             شعار الموقع
                         </label>
                         <div class="md:col-span-2">
@@ -109,7 +109,7 @@
                 
                     <!-- Colors -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="primary_color" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="primary_color" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             اللون الأساسي
                         </label>
                         <div class="md:col-span-2">
@@ -120,7 +120,7 @@
                     </div>
                 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="forgin_color" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="forgin_color" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             اللون الثانوي
                         </label>
                         <div class="md:col-span-2">
@@ -132,7 +132,7 @@
                 
                     <!-- Contact Info -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="email" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="email" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             البريد الإلكتروني
                         </label>
                         <div class="md:col-span-2">
@@ -144,7 +144,7 @@
                     </div>
                 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="phone" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="phone" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             رقم الهاتف
                         </label>
                         <div class="md:col-span-2">
@@ -157,7 +157,7 @@
                 
                     <!-- Social Media -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="facebook" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="facebook" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             فيسبوك
                         </label>
                         <div class="md:col-span-2">
@@ -170,7 +170,7 @@
                 
                     <!-- باقي روابط السوشيال ميديا بنفس الطريقة -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="twitter" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+                        <label for="twitter" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
                             تويتر
                         </label>
                         <div class="md:col-span-2">
@@ -183,7 +183,7 @@
                 
 <!-- WhatsApp -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-    <label for="whatsapp" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+    <label for="whatsapp" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
         واتساب
     </label>
     <div class="md:col-span-2">
@@ -196,7 +196,7 @@
 
 <!-- Instagram -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-    <label for="instagram" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+    <label for="instagram" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
         انستغرام
     </label>
     <div class="md:col-span-2">
@@ -209,7 +209,7 @@
 
 <!-- YouTube -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-    <label for="youtube" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+    <label for="youtube" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
         يوتيوب
     </label>
     <div class="md:col-span-2">
@@ -222,7 +222,7 @@
 
 <!-- Snapchat -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-    <label for="snapchat" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+    <label for="snapchat" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
         سناب شات
     </label>
     <div class="md:col-span-2">
@@ -235,7 +235,7 @@
 
 <!-- TikTok -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-    <label for="tiktok" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+    <label for="tiktok" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
         تيك توك
     </label>
     <div class="md:col-span-2">
@@ -248,7 +248,7 @@
 
 <!-- العملة -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-    <label for="currancy" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+    <label for="currancy" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
         العملة
     </label>
     <div class="md:col-span-2">
@@ -268,7 +268,7 @@
 
 <!-- الدفعة -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-    <label for="batch" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+    <label for="batch" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
         ٌقيمة الدفعة الاولى
 
     </label>
@@ -282,7 +282,7 @@
 
 <!-- الرقم الضريبي -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-    <label for="number_dareba" class="block text-sm font-medium text-white dark:text-gray-300 md:pt-2">
+    <label for="number_dareba" class="text-sm font-medium text-gray-900 dark:text-gray-300 pt-2">
         الرقم الضريبي
     </label>
     <div class="md:col-span-2">
