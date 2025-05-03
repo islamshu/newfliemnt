@@ -3,7 +3,7 @@
         @foreach ($sliders as $item)
         <div class="swiper-slide">
             <a href="{{$item->url}}" class="text-decoration-none text-dark">
-                <img loading="lazy" src="{{$item->image}}" class="w-100 h-100 object-fit-cover" style="aspect-ratio: 16/7; object-fit: cover;" alt="">
+                <img loading="lazy" src="{{$item->image}}" class="w-100 h-100 object-fit-cover" style="aspect-ratio: 16/6; object-fit: cover;" alt="">
             </a>
         </div>
         @endforeach
