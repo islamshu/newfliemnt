@@ -167,10 +167,7 @@
         var minChars = 6;
         $("#errorMessage").text("");
 
-        if (code.length < minChars) {
-            $("#errorMessage").text("الكود يجب أن يكون على الأقل " + minChars + " أحرف");
-            return;
-        }
+       
 
         // ✅ إظهار اللودر
         $(".loaderk").show();
