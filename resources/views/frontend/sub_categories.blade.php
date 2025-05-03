@@ -10,7 +10,7 @@
                 style="margin-left:65px">عرض الكل <i class="fa-solid fa-arrow-left-long"></i></a>
         </div>
         <div class="slick-carousel">
-            @foreach ($category->products()->take(6)->get() as $item)
+            @foreach ($category->products()->orderBy('id','desc')->take(6)->get() as $item)
             <div class="">
                 <a href="{{route('single_product',$item->slug)}}" class="text-decoration-none">
                     <div class="product">
