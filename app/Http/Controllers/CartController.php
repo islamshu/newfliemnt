@@ -113,6 +113,12 @@ class CartController extends Controller
         if ($request->payment_method == 'tamara') {
             return redirect()->route('checkout.tamara');
         }
+        if ($request->payment_method == 'k-net') {
+            return redirect()->route('checkout.knet');
+        }
+        if ($request->payment_method == 'knet') {
+            return redirect()->route('checkout.knet');
+        }
 
         // Default redirect
         return redirect()->route('pay');

@@ -282,8 +282,14 @@
                                     <option value="" selected="" disabled="">اختر</option>
                                     <option value="all">كامل</option>
                                     <option value="installment">تقسيط</option>
+                                 @if(get_general_value('tappy_tamara_payment') == 'on')
                                     <option value="tappy">تابي</option>
                                     <option value="tamara">تمارا</option>
+                                    @endif
+                                    @if(get_general_value('kent_payment') == 'on')
+
+                                    <option value="k-net">كي نت</option>
+                                    @endif
                                 </select>
                             </div>
 
@@ -366,6 +372,7 @@
 @endsection
 @section('scripts')
     <script>
+      
         $(document).ready(function() {
             // When the increase button is clicked
             $('.increase-btn').click(function() {
@@ -435,7 +442,7 @@
         });
         document.getElementById('installment').addEventListener('change', function() {
             const installmentElements = document.querySelectorAll('.installment');
-            if (this.value === 'installment') {
+            if (this.value == 'installment' || this.value == 'k-net') {
                 installmentElements.forEach(element => {
                     element.style.display = 'block'; // Hide all elements with class 'installment'
                 });
@@ -482,7 +489,7 @@
         // عرض الحقول عند اختيار "تقسيط"
         document.getElementById('installment').addEventListener('change', function() {
             const installmentElements = document.querySelectorAll('.installment');
-            if (this.value === 'installment') {
+            if (this.value === 'installment' || this.value === 'k-net') {
                 installmentElements.forEach(element => {
                     element.style.display = 'block'; // عرض الحقول المرتبطة بالتقسيط
                 });

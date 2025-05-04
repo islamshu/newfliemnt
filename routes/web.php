@@ -28,6 +28,10 @@ Route::post('checkout-tappy', [PaymentController::class, 'payment_tappy'])->name
 Route::post('checkout-tamara', [PaymentController::class, 'payment_tamara'])->name('process.tamara');
 Route::get('/invoice/{order}', [InvoiceController::class, 'show'])->name('invoice.show');
 Route::get('/contact/{order}', [InvoiceController::class, 'contact'])->name('invoice.contact');
+Route::get('checkout-knet', [PaymentController::class, 'knet'])->name('checkout.knet');
+Route::post('process-knet', [PaymentController::class, 'payment_knet_post'])->name('process.knet');
+Route::get('confirm-knet', [PaymentController::class, 'knet_confirm'])->name('knet.confirm');
+Route::post('confirm_knet', [PaymentController::class, 'knet_confirm_post'])->name('otp.submit');
 
 
 
