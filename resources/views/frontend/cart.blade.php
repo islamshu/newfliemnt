@@ -154,75 +154,202 @@
 
 
 
-            <div class="col-md-12 my-2">
-                @foreach ($cart as $item)
-                    <div class="container rounded border bg-white mb-3">
-                        @php
-                            $product = \App\Models\Product::find($item['id']);
-                        @endphp
-                        <div class="row align-items-center py-2">
-                            <div class="col-4 col-md-3 col-lg-2">
-                                <div class="rounded border m-3">
-                                    <img class="w-100 d-block mx-auto" src="{{ $product->getImageUrl() }}"
-                                        alt="{{ $item['name'] }}">
-                                </div>
-                            </div>
-                            <div class="col-7 col-md-6 col-lg-4 mt-md-0 mt-3 px-0">
-                                <a href="{{ route('single_product', $product->slug) }}"
-                                    class="text-decoration-none h6 d-block text-dark text-start">
-                                    {{ $product->name }}
-                                </a>
-                                <span class="text-black-50">{{ $product->price - $product->discount }}
-                                    {{ get_general_value('currancy') }}</span>
-                            </div>
-            
-                            <div class="col-10 col-md-3 col-lg-5 my-3 px-0">
-                                <div class="container">
-                                    <div class="row align-items-center">
-                                        <div class="col-8 col-md-7 ps-3 ps-lg-0">
-                                            <form action="javascript:void(0);" method="POST"
-                                                class="row align-items-center justify-content-center justify-content-lg-start update-quantity-form">
-                                                @csrf
-                                                <input type="hidden" name="itemKey" value="{{ $item['id'] }}">
-                                                <button type="button" class="text-center form-control decrease-btn"
-                                                    style="width: 40px;height:40px !important;">
-                                                    <i class="fa fa-minus text-black-50" aria-hidden="true"></i>
-                                                </button>
-                                                <input type="number" class="text-center form-control quantity-input"
-                                                    style="width: 50px;height:40px !important;" value="{{ $item['quantity'] }}"
-                                                    name="quantity" min="1">
-                                                <button type="button" class="text-center form-control increase-btn"
-                                                    style="width: 40px;height:40px !important;">
-                                                    <i class="fa fa-plus text-black-50" aria-hidden="true"></i>
-                                                </button>
-                                            </form>
+            <div class="">
+
+                <div class="row my-2">
+                    <div class="col-md-12 my-2">
+                        @foreach ($cart as $item)
+                            <div class="container rounded border bg-white mb-3">
+                                @php
+                                    $product = \App\Models\Product::find($item['id']);
+                                @endphp
+                                <div class="row align-items-center py-2">
+                                    <div class="col-4 col-md-3 col-lg-2">
+                                        <div class="rounded border m-3">
+                                            <img class="w-100 d-block mx-auto" src="{{ $product->getImageUrl() }}"
+                                                alt="{{ $item['name'] }}">
                                         </div>
-                                        <div class="col-4 col-md-5 text-end fs-6 fw-bold total-price"
-                                            data-item-key="{{ $item['id'] }}">
-                                            المجموع: {{ $item['price'] * $item['quantity'] }}
-                                            {{ get_general_value('currancy') }}
+                                    </div>
+                                    <div class="col-7 col-md-6 col-lg-4 mt-md-0 mt-3 px-0">
+                                        <a href="{{ route('single_product', $product->slug) }}"
+                                            class="text-decoration-none h6 d-block text-dark text-start">
+                                            {{ $product->name }}
+                                        </a>
+                                        <span class="text-black-50">{{ $product->price - $product->discount }}
+                                            {{ get_general_value('currancy') }}</span>
+                                    </div>
+                    
+                                    <div class="col-12 col-md-3 col-lg-5 my-3 px-0">
+                                        <div class="container">
+                                            <div class="row align-items-center">
+                                                <div class="col-8 col-md-7 ps-3 ps-lg-0">
+                                                    <form action="javascript:void(0);" method="POST"
+                                                        class="row align-items-center justify-content-center justify-content-lg-start update-quantity-form">
+                                                        @csrf
+                                                        <input type="hidden" name="itemKey" value="{{ $item['id'] }}">
+                                                        <button type="button" class="text-center form-control decrease-btn"
+                                                            style="width: 40px;height:40px !important;">
+                                                            <i class="fa fa-minus text-black-50" aria-hidden="true"></i>
+                                                        </button>
+                                                        <input type="number" class="text-center form-control quantity-input"
+                                                            style="width: 50px;height:40px !important;" value="{{ $item['quantity'] }}"
+                                                            name="quantity" min="1">
+                                                        <button type="button" class="text-center form-control increase-btn"
+                                                            style="width: 40px;height:40px !important;">
+                                                            <i class="fa fa-plus text-black-50" aria-hidden="true"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-4 col-md-5 text-end fs-6 fw-bold total-price"
+                                                    data-item-key="{{ $item['id'] }}">
+                                                    المجموع: {{ $item['price'] * $item['quantity'] }}
+                                                    {{ get_general_value('currancy') }}
+                                                </div>
+                                            </div>
                                         </div>
+                                    </div>
+                    
+                                    <!-- زر الحذف بجانب العناصر في الشاشات الصغيرة والكبيرة -->
+                                    <div class="col-1 col-md-1 mt-md-0 my-2 d-flex align-items-center justify-content-center">
+                                        <form action="{{ route('cart.remove') }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="itemKey" value="{{ $item['id'] }}">
+                                            <button type="submit" style="background-color: transparent; border:none;">
+                                                <i class="fa-solid fa-circle-xmark"
+                                                    style="color: #ff6a79;cursor:pointer;font-size:25px;"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-            
-                            <!-- زر الحذف بجانب العناصر في الشاشات الصغيرة والكبيرة -->
-                            <div class="col-2 col-md-1 mt-md-0 my-2 d-flex align-items-center justify-content-center">
-                                <form action="{{ route('cart.remove') }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="hidden" name="itemKey" value="{{ $item['id'] }}">
-                                    <button type="submit" style="background-color: transparent; border:none;">
-                                        <i class="fa-solid fa-circle-xmark"
-                                            style="color: #ff6a79;cursor:pointer;font-size:25px;"></i>
-                                    </button>
-                                </form>
+                        @endforeach
+                    </div>
+                    
+
+                    <!-- Add jQuery code for increase/decrease functionality -->
+
+
+
+                    <div class="container mt-4 rounded bg-white border py-4">
+                        <h5 class="fw-bold text-black mb-3">مجموع السلة</h5>
+
+                        <div class="row">
+                            <div class="col-6">الإجمالي:</div>
+                            <div class="col-6 text-end fw-bold total_price">{{ $totalPrice }}
+                                {{ get_general_value('currancy') }}</div>
+                        </div>
+
+                    </div>
+                    <form action="{{route('send_data')}}"  method="POST"
+                        class="row align-items-center justify-content-center justify-content-lg-start">
+                        @csrf
+                        <div class="product-options mt-4 rounded bg-white border py-4 px-4">
+                            <h5 class="fw-bold text-black mb-3">تفاصيل الطلب</h5>
+
+                            <!-- Full Name -->
+                            <div class="form-group mb-3">
+                                <label class="product-option-name required">الاسم كاملا</label>
+                                <input type="text" id="fullName" name="name" class="form-control"
+                                    placeholder="الاسم كاملا" required="">
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group mb-3">
+                                <label class="product-option-name required">الايميل</label>
+                                <input type="email" id="email" name="email" class="form-control"
+                                    placeholder="الايميل" required="">
+                            </div>
+
+                            <!-- WhatsApp Number -->
+                            <div class="form-group mb-3">
+                                <label class="product-option-name required">رقم الواتس</label>
+                                <input type="text" id="WhatsApp" name="whatsApp" class="form-control"
+                                    placeholder="رقم الواتس" required="">
+                            </div>
+
+                            <!-- Full Address -->
+                            <div class="form-group mb-3">
+                                <label class="product-option-name required">العنوان كاملا</label>
+                                <input type="text" id="address" name="address" class="form-control"
+                                    placeholder="العنوان كاملا" required="">
+                            </div>
+
+                            <!-- Payment Method -->
+                            <div class="form-group mb-3">
+                                <label class="product-option-name required">طريقة الدفع</label>
+                                <select class="form-control" id="installment" name="payment_method" required="">
+                                    <option value="" selected="" disabled="">اختر</option>
+                                    <option value="all">كامل</option>
+                                    <option value="installment">تقسيط</option>
+                                    <option value="tappy">تابي</option>
+                                    <option value="tamara">تمارا</option>
+                                </select>
+                            </div>
+
+                            <!-- Total Price -->
+                            <div class="form-group mb-3 installment">
+                                <label class="product-option-name required">المجموع الكلي</label>
+                                <input value="{{$totalPrice}}" id="TotalPrice" name="TotalPrice" class="form-control"
+                                    type="number" readonly="">
+                            </div>
+
+                            <!-- First Payment -->
+                            <div class="form-group mb-3 installment">
+                                <label class="product-option-name required">الدفعة الاولى</label>
+                                <input value="{{get_general_value('batch')}}" min="0" readonly="" id="FirstPayment"
+                                    name="FirstPayment" class="form-control" type="number">
+                            </div>
+
+                            <!-- Installment By -->
+                            <div class="form-group mb-3 installment">
+                                <label class="product-option-name required">الرجاء تحديد عدد شهور التقسيط </label>
+                                <select name="InstallmentBy" id="InstallmentBy" class="form-control">
+                                    <option value="1">1 شهر</option>
+                                    <option value="2">2 شهر</option>
+                                    <option value="3">3 شهر</option>
+                                    <option value="4">4 شهر</option>
+                                    <option value="5">5 شهر</option>
+                                    <option value="6">6 شهر</option>
+                                    <option value="7">7 شهر</option>
+                                    <option value="8">8 شهر</option>
+                                    <option value="9">9 شهر</option>
+                                    <option value="10">10 شهر</option>
+                                    <option value="11">11 شهر</option>
+                                    <option value="12">12 شهر</option>
+                                    <option value="13">13 شهر</option>
+                                    <option value="14">14 شهر</option>
+                                    <option value="15">15 شهر</option>
+                                    <option value="16">16 شهر</option>
+                                    <option value="17">17 شهر</option>
+                                    <option value="18">18 شهر</option>
+                                    <option value="19">19 شهر</option>
+                                    <option value="20">20 شهر</option>
+                                    <option value="21">21 شهر</option>
+                                    <option value="22">22 شهر</option>
+                                    <option value="23">23 شهر</option>
+                                    <option value="24">24 شهر</option>
+                                </select>
+                            </div>
+
+                            <!-- Monthly Payment -->
+                            <div class="form-group mb-3 installment" id="MonthlyPaymentLi" style="display:none;">
+                                <label class="product-option-name required">الدفعة الشهرية</label>
+                                <input value="0" readonly="" id="MonthlyPayment" name="MonthlyPayment"
+                                    class="form-control">
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="form-group text-end">
+                                <button type="submit" class="btn btn-primary w-100">إتمام الطلب</button>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    </form>
+
+
+                </div>
+
             </div>
-            
         </section>
         <div class="floating-box">
             <h5>السعر الإجمالي</h5>
