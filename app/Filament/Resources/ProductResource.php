@@ -39,12 +39,23 @@ class ProductResource extends Resource
                         ->label('اسم المنتج')
                         ->required(),
                 ]),
-                Forms\Components\Grid::make(1)->schema([
-                    Forms\Components\FileUpload::make('image')
-                        ->label('اختر صورة المنتج')
-                        ->image()
-                        ->required(),
-                ]),
+                Forms\Components\FileUpload::make('image')
+                ->label('اختر صورة المنتج')
+                ->image()
+                ->disk('public')
+                ->directory('products')
+                ->visibility('public')
+                ->imagePreviewHeight('250')
+                ->preserveFilenames()
+                ->openable()
+                ->downloadable()
+                ->imageEditor()
+                ->default(function ($record) {
+                    return $record?->image_path; // هذا يرجع المسار الخام للصورة
+                })
+                ->required(fn (string $operation): bool => $operation === 'create')
+            
+            ,
                 Forms\Components\Grid::make(1)->schema([
                     Forms\Components\Textarea::make('description')
                         ->label('وصف المنتج'),

@@ -229,16 +229,16 @@
                             <div thumbsSlider="" class="swiper mySwiper" style="overflow:visible !important">
                                 <div class="swiper-wrapper d-flex flex-column" style="height: 80% !important;">
                                     <div class="swiper-slide">
-                                        <img src="{{$product->image}}" class="itemImage ms-auto me-auto" alt="{{$product->name}}">
+                                        <img src="{{$product->getImageUrl()}}" class="itemImage ms-auto me-auto" alt="{{$product->name}}">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="{{$product->image}}" class="itemImage ms-auto me-auto" alt="{{$product->name}}">
+                                        <img src="{{$product->getImageUrl()}}" class="itemImage ms-auto me-auto" alt="{{$product->name}}">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="{{$product->image}}" class="itemImage ms-auto me-auto" alt="{{$product->name}}">
+                                        <img src="{{$product->getImageUrl()}}" class="itemImage ms-auto me-auto" alt="{{$product->name}}">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="{{$product->image}}" class="itemImage ms-auto me-auto" alt="{{$product->name}}">
+                                        <img src="{{$product->getImageUrl()}}" class="itemImage ms-auto me-auto" alt="{{$product->name}}">
                                     </div>
                                 </div>
 
@@ -249,16 +249,16 @@
                             <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff;" class="swiper mySwiper2">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
-                                        <img src="{{$product->image}}" class="itemImage ms-auto me-auto" alt="{{$product->name}}">
+                                        <img src="{{$product->getImageUrl()}}" class="itemImage ms-auto me-auto" alt="{{$product->name}}">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="{{$product->image}}" class="itemImage ms-auto me-auto" alt="{{$product->name}}">
+                                        <img src="{{$product->getImageUrl()}}" class="itemImage ms-auto me-auto" alt="{{$product->name}}">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="{{$product->image}}" class="itemImage ms-auto me-auto" alt="{{$product->name}}">
+                                        <img src="{{$product->getImageUrl()}}" class="itemImage ms-auto me-auto" alt="{{$product->name}}">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="{{$product->image}}" class="itemImage ms-auto me-auto" alt="{{$product->name}}">
+                                        <img src="{{$product->getImageUrl()}}" class="itemImage ms-auto me-auto" alt="{{$product->name}}">
                                     </div>
 
                                 </div>
@@ -286,7 +286,7 @@
 
 
                     <h2 class="d-md-block d-none fw-bold mb-3">{{$product->name}}</h2>
-                    <span class="mb-3 d-inline-block fw-bold text-body-secondary" style="font-size: 15px;color:gray">ضمان سنتين حاسبات العرب</span>
+                    <span class="mb-3 d-inline-block fw-bold text-body-secondary" style="font-size: 15px;color:gray"> {{get_daman_text()}}</span>
                     <p class="text-success fw-bold"> <span class="text-body fw-normal">الحالة:</span> متوفر في المخزون 14 منتجات
                     </p>
                     <div class="row">
@@ -519,7 +519,7 @@
 
 
                     <div class="product-entry__image mb-2">
-                        <img loading="lazy" src="{{ asset($item->image) }}"
+                        <img loading="lazy" src="{{ asset($item->getImageUrl()) }}"
                             class="d-block m-auto " style="object-fit:contain;width:100%;"
                             alt="{{$item->name}}">
 

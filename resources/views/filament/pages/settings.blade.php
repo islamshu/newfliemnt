@@ -258,6 +258,7 @@
             <option value="$" @if(get_general_value('currancy') == '$') selected @endif>دولار امريكي</option>
             <option value="د.إ" @if(get_general_value('currancy') == 'د.إ') selected @endif >درهم إماراتي</option>
                     <option value="ر.ع"@if(get_general_value('currancy') == 'ر.ع') selected @endif >ريال عماني </option>
+                    <option value="د.ك"@if(get_general_value('currancy') == 'د.ك') selected @endif >دينار كويتي  </option>
 
         </select>
      

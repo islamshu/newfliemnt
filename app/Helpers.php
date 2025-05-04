@@ -31,3 +31,17 @@ function get_page_title($page)
             return 'الصفحة غير موجودة';
     }
 }
+function get_daman_text(){
+    switch (get_general_value('currancy')) {
+        case 'ر.س':
+            return 'ضمان سنتين حاسبات العرب';
+        case 'ر.ع':
+            return 'ضمان الوكيل سنتين';
+            case 'د.إ':
+                return 'ضمان الوكيل سنتين';
+                case 'د.ك':
+                    return 'ضمان ألفا سنتين';
+        default:
+            return '';
+}
+}

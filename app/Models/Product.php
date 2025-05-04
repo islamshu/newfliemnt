@@ -17,15 +17,27 @@ class Product extends Model
     {
         return $this->belongsTo(SubCategory::class, 'sub_category_id');
     }
-    public function getImageAttribute($value)
+
+
+    // public function getImageAttribute($value)
+    // {
+    //     return $value ? asset('storage/' . $value) : null;
+    // }
+    public function getImageUrl()
     {
-        return asset('storage/' . $value);
+        // تحقق إذا كانت الصورة موجودة ثم أعرض رابط الصورة
+        return  $this->image ? asset('storage/' .  $this->image) : null;
     }
+    public function getImagePathAttribute()
+    {
+        return $this->getRawOriginal('image');
+    }
+
+
     public function similarProducts()
     {
         return $this->where('sub_category_id', $this->sub_category_id)
-                    ->where('id', '!=', $this->id)
-                    ->take(10)->get();
+            ->where('id', '!=', $this->id)
+            ->take(10)->get();
     }
-   
 }

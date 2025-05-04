@@ -40,6 +40,8 @@
                                 $flag = 'usa-flag.png';
                             }elseif($currency == 'ر.ع'){
                                 $flag='oman.jpg';
+                            }elseif($currency == 'د.ك'){
+                                $flag='kwt.png';
                             }
                         @endphp
                         

@@ -17,7 +17,7 @@
 
 
                         <div class="product-entry__image mb-2">
-                            <img loading="lazy" src="{{ asset($item->image) }}"
+                            <img loading="lazy" src="{{ asset($item->getImageUrl()) }}"
                                 class="d-block m-auto " style="object-fit:contain;width:100%;"
                                 alt="{{$item->name}}">
 
