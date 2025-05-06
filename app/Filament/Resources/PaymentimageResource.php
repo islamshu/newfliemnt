@@ -32,10 +32,24 @@ class PaymentimageResource extends Resource
                         ->label('اسم شركة الدفع')
                 ]),
                 Forms\Components\Grid::make(1)->schema([
+                    Forms\Components\TextInput::make('link')
+                        ->label('الرابط  ')
+                ]),
+                Forms\Components\Grid::make(1)->schema([
                     Forms\Components\FileUpload::make('image')
-                    ->label('اختر صورة الدفع')
-                        ->image()
-                        ->required(),
+                    ->label('اختر الصورة ')
+                    ->image()
+                    ->disk('public')
+                    ->visibility('public')
+                    ->imagePreviewHeight('250')
+                    ->preserveFilenames()
+                    ->openable()
+                    ->downloadable()
+                    ->imageEditor()
+                    ->default(function ($record) {
+                        return $record?->image; // هذا يرجع المسار الخام للصورة
+                    })
+                    ->required(fn (string $operation): bool => $operation === 'create')
                 ]),
             ]);
     }

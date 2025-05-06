@@ -9,12 +9,17 @@ class Paymentimage extends Model
     protected $fillable = [
         'image',
         'name',
+        'link'
     ];
     
-    public function getImageAttribute($value)
+    // public function getImageAttribute($value)
+    // {
+    //     return asset('storage/' . $value);
+    // }
+    public function getImageUrl()
     {
-        return asset('storage/' . $value);
+        // تحقق إذا كانت الصورة موجودة ثم أعرض رابط الصورة
+        return  $this->image ? asset('storage/' .  $this->image) : null;
     }
-
    
 }

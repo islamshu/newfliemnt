@@ -131,10 +131,10 @@
                         <span style="font-size: 13px; " class="me-2 d-none d-lg-block">الرقم الضريبي :
                             {{ get_general_value('number_dareba') }}</span>
                         @foreach (App\Models\Paymentimage::get() as $item)
-                            <a >
+                            <a href="{{$item->link}}" target="_blank" class="me-1">
                                 <span class="me-1"
                                     style="width:55px;height:30px; background-color: white;padding:2px 10px;border-radius:4px;display:flex;justify-content:center;align-items:center;">
-                                    <img loading="lazy" src="{{ $item->image }}"
+                                    <img loading="lazy" src="{{ $item->getImageUrl() }}"
                                         width="35" height="20" alt="{{ $item->title }}">
                                 </span>
                             </a>
