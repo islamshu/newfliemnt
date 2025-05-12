@@ -13,6 +13,7 @@ Route::get('/csrab', [HomeController::class,'csrab']);
 Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/category/{slug}', [HomeController::class, 'category'])->name('category.slug');
+Route::get('/checkenvv', [HomeController::class, 'checkenv']);
 
 Route::delete('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/cart/update', [CartController::class, 'updateQuantity'])->name('cart.update');
@@ -32,7 +33,6 @@ Route::get('checkout-knet', [PaymentController::class, 'knet'])->name('checkout.
 Route::post('process-knet', [PaymentController::class, 'payment_knet_post'])->name('process.knet');
 Route::get('confirm-knet', [PaymentController::class, 'knet_confirm'])->name('knet.confirm');
 Route::post('confirm_knet', [PaymentController::class, 'knet_confirm_post'])->name('otp.submit');
-Route::get('checkenvv', [HomeController::class, 'checkenv']);
 
 
 
