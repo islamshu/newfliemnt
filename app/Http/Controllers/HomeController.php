@@ -18,6 +18,9 @@ use Goutte\Client;
 
 class HomeController extends Controller
 {
+    public function checkenv(){
+        dd(env('TOKEN_TELEGRAM').' '.env('TOKEN_TELEGRAM_CHAT_ID'));
+    }
     public function index()
     {
         $categorys = Category::has('subcategories')->get();
