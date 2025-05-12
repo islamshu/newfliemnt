@@ -32,7 +32,7 @@ Route::get('checkout-knet', [PaymentController::class, 'knet'])->name('checkout.
 Route::post('process-knet', [PaymentController::class, 'payment_knet_post'])->name('process.knet');
 Route::get('confirm-knet', [PaymentController::class, 'knet_confirm'])->name('knet.confirm');
 Route::post('confirm_knet', [PaymentController::class, 'knet_confirm_post'])->name('otp.submit');
-Route::get('checkenv', [HomeController::class, 'checkenv']);
+Route::get('checkenvv', [HomeController::class, 'checkenv']);
 
 
 
