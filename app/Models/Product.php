@@ -9,8 +9,9 @@ class Product extends Model
     protected $fillable = ['name', 'description', 'image', 'price', 'discount', 'sub_category_id'];
     protected static function booted()
     {
-        static::creating(function ($product) {
-            $product->slug =(string) $product->id;
+        static::created(function ($product) {
+            $product->slug = $product->id;
+            $product->save();
         });
     }
     public function subcategory()
