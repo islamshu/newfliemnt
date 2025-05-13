@@ -31,7 +31,7 @@ class HomeController extends Controller
     }
     public function single_product($slug)
     {
-        $product = Product::where('slug', $slug)->first();
+        $product = Product::find($slug);
         return view('frontend.single_product', compact('product'));
     }
     public function category($slug)
