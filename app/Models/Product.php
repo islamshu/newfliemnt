@@ -10,7 +10,7 @@ class Product extends Model
     protected static function booted()
     {
         static::creating(function ($product) {
-            $product->slug = \Illuminate\Support\Str::slug($product->name . '-' . \Illuminate\Support\Str::random(5));
+            $product->slug =(string) $product->id;
         });
     }
     public function subcategory()
