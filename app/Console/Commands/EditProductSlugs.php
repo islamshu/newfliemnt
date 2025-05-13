@@ -34,11 +34,11 @@ class EditProductSlugs extends Command
     }
 
     foreach ($products as $product) {
-        $oldSlug = $product->slug;
-        $newSlug = (string) $product->id;
+        // $oldSlug = $product->slug;
+        // $newSlug = (string) $product->id;
 
-        $product->slug = $newSlug;
-        // $product->slug = \Illuminate\Support\Str::slug($product->name . '-' . \Illuminate\Support\Str::random(5));
+        // $product->slug = $newSlug;
+        $product->slug = \Illuminate\Support\Str::slug($product->name . '-' . \Illuminate\Support\Str::random(5));
 
         $product->save();
 
