@@ -171,7 +171,7 @@
                                         </div>
                                     </div>
                                     <div class="col-7 col-md-6 col-lg-4 mt-md-0 mt-3 px-0">
-                                        <a href="{{ route('single_product', $product->slug) }}"
+                                        <a href="{{ route('single_product', $product->id) }}"
                                             class="text-decoration-none h6 d-block text-dark text-start">
                                             {{ $product->name }}
                                         </a>

@@ -551,7 +551,7 @@
         </h3>
         <div class="slider" dir="ltr">
             @foreach ($product->similarProducts() as $item)
-                <a href="{{ route('single_product', $item->slug) }}" class="text-decoration-none">
+                <a href="{{ route('single_product', $item->id) }}" class="text-decoration-none">
                     <div class="product">
 
 

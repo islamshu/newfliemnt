@@ -8,7 +8,7 @@ use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class,'index'])->name('home');
-Route::get('product/{slug}',[HomeController::class,'single_product'])->name('single_product');
+Route::get('product/{id}',[HomeController::class,'single_product'])->name('single_product');
 Route::get('/csrab', [HomeController::class,'csrab']);
 Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');

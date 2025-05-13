@@ -29,9 +29,9 @@ class HomeController extends Controller
         $subcategory = SubCategory::with('products')->where('is_homepage',1)->orderby('created_at','desc')->get();
         return view('frontend.index', compact('categorys', 'sliders', 'main_cats', 'subcategory'));
     }
-    public function single_product($slug)
+    public function single_product($id)
     {
-        $product = Product::find($slug);
+        $product = Product::find($id);
         return view('frontend.single_product', compact('product'));
     }
     public function category($slug)

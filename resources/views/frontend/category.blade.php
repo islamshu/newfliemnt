@@ -22,7 +22,7 @@
             <div class="row">
                 @foreach ($category->products()->orderby('id','desc')->get() as $item)
                 <div class="col-md-3 col-6 mb-2">
-                    <a href="{{route('single_product',$item->slug)}}" class="text-decoration-none">
+                    <a href="{{route('single_product',$item->id)}}" class="text-decoration-none">
                         <div class="product">
     
     

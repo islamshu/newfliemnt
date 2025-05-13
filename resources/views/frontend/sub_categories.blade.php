@@ -12,7 +12,7 @@
         <div class="slick-carousel">
             @foreach ($category->products()->orderBy('id','desc')->take(6)->get() as $item)
             <div class="">
-                <a href="{{route('single_product',$item->slug)}}" class="text-decoration-none">
+                <a href="{{route('single_product',$item->id)}}" class="text-decoration-none">
                     <div class="product">
 
 

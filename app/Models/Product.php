@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = ['name', 'description', 'image', 'price', 'discount', 'sub_category_id'];
-    protected static function booted()
+   protected static function booted()
     {
-        static::created(function ($product) {
-            $product->slug = $product->id;
-            $product->save();
+        static::creating(function ($product) {
+            $product->slug = \Illuminate\Support\Str::slug($product->name . '-' . \Illuminate\Support\Str::random(5));
         });
     }
     public function subcategory()
