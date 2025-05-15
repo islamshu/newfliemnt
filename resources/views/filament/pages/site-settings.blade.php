@@ -46,6 +46,14 @@
                         <a href="{{ url('/top-image') }}" target="_blank">مشاهدة الصفحة</a>
                     </td>
                 </tr>
+                 <tr>
+                    <td class="px-4 py-2">5</td>
+                    <td class="px-4 py-2 border-b">رفع الملفات  </td>
+
+                    <td class="px-4 py-2   border-b text-blue-600">
+                        <a href="{{ url('/data-uploader') }}" target="_blank">مشاهدة الصفحة</a>
+                    </td>
+                </tr>
             </tbody>
             
 

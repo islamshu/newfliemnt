@@ -46,6 +46,14 @@
                         <a href="{{route('filament.admin.resources.paymentimages.index')}}" target="_blank">مشاهدة الصفحة</a>
                     </td>
                 </tr>
+                  <tr>
+                    <td class="px-4 py-2">5</td>
+                    <td class="px-4 py-2 border-b"> رفع ملفات </td>
+
+                    <td class="px-4 py-2   border-b text-blue-600">
+                        <a href="{{ url('/admin/data-uploader') }}" target="_blank">مشاهدة الصفحة</a>
+                    </td>
+                </tr>
             </tbody>
             
 
