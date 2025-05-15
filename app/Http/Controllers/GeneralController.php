@@ -42,4 +42,14 @@ public function add_general(Request $request)
 
     return redirect()->back()->with(['success' => trans('تم التعديل بنجاح')]);
 }
+public function upload_file(Request $request)
+{
+    if ($request->hasFile('file')) {
+        $path = $request->file('file')->store('uploads/temp', 'public'); // Save to public disk
+        $url = Storage::disk('public')->url($path);
+        return response()->json(['url' => $url]);
+    }
+
+    return response()->json(['error' => 'No file uploaded'], 400);
+}
 }
