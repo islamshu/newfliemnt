@@ -330,7 +330,10 @@ input:checked + .slider:before {
                                 </option>
                                 <option value="د.ك"@if (get_general_value('currancy') == 'د.ك') selected @endif>دينار كويتي
                                 </option>
-
+                                <option value="ر.ق"@if (get_general_value('currancy') == 'ر.ق') selected @endif>ريال قطري 
+                                </option>
+                                  <option value="د.ب"@if (get_general_value('currancy') == 'د.ب') selected @endif>دينار بحريني  
+                                </option>
                             </select>
 
                         </div>

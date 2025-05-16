@@ -42,6 +42,12 @@
                                 $flag='oman.jpg';
                             }elseif($currency == 'د.ك'){
                                 $flag='kwt.png';
+                            
+                            }elseif($currency == 'ر.ق'){
+                                $flag='qater.png';
+                            
+                             }elseif($currency == 'د.ب'){
+                                $flag='bahreen.png';
                             }
                         @endphp
                         
