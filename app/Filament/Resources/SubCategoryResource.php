@@ -94,7 +94,7 @@ class SubCategoryResource extends Resource
                     ->offColor('danger'),
                  TextInputColumn::make('order')
     ->label('الترتيب')
-    ->rules(['required', 'integer', 'min:1'])
+    ->rules([ 'integer', 'min:1'])
     ->sortable(),
                     
                     
