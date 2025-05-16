@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubCategory extends Model
 {
-    protected $fillable = ['name', 'slug', 'category_id', 'is_homepage','image'];
+    protected $fillable = ['name', 'slug', 'category_id', 'is_homepage','image','order'];
     protected static function booted()
     {
         static::creating(function ($subCategory) {

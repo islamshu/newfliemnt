@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\FetchCategoriesAndSubcategories;
+use App\Jobs\ImportMainCats;
 use App\Models\Category;
 use App\Models\MainCats;
 use App\Models\Product;
@@ -18,16 +19,27 @@ use Goutte\Client;
 
 class HomeController extends Controller
 {
-    public function checkenv(){
-        dd(env('TOKEN_TELEGRAM').' '.env('TOKEN_TELEGRAM_CHAT_ID'));
+    public function checkenv()
+    {
+        dd(env('TOKEN_TELEGRAM') . ' ' . env('TOKEN_TELEGRAM_CHAT_ID'));
     }
     public function index()
     {
         $categorys = Category::has('subcategories')->get();
         $sliders = Slider::get();
         $main_cats = MainCats::get();
-        $subcategory = SubCategory::with('products')->where('is_homepage',1)->orderby('created_at','desc')->get();
-        return view('frontend.index', compact('categorys', 'sliders', 'main_cats', 'subcategory'));
+        
+ $hasOrder = SubCategory::where('is_homepage', 1)->whereNotNull('order')->exists();
+
+    $subcategory = SubCategory::with('products')
+        ->where('is_homepage', 1)
+        ->when($hasOrder, function ($query) {
+            $query->orderBy('order', 'asc');
+        }, function ($query) {
+            $query->orderBy('created_at', 'desc');
+        })
+        ->get();
+                return view('frontend.index', compact('categorys', 'sliders', 'main_cats', 'subcategory'));
     }
     public function single_product($id)
     {
@@ -41,80 +53,54 @@ class HomeController extends Controller
     }
     public function page($page)
     {
-        
+
         return view('frontend.page', compact('page'));
     }
 
-   public function csrab()
+    public function csrab()
 {
-    // نكرر من 22 إلى 39
-    for ($categoryId = 22; $categoryId <= 39; $categoryId++) {
+    set_time_limit(300); // 5 دقائق
 
-        echo "جاري معالجة الفئة رقم: $categoryId<br>";
+    MainCats::truncate();
 
-        $response = Http::get("https://albayader-uae.store/categories.php?category_id=$categoryId");
+    try {
+        $response = Http::timeout(120)->get('https://ploteam-sa.store');
+    } catch (\Exception $e) {
+        return "Error fetching URL: " . $e->getMessage();
+    }
 
-        if ($response->successful()) {
-            $htmlContent = $response->body();
+    if ($response->successful()) {
+        $htmlContent = $response->body();
+        $crawler = new Crawler($htmlContent);
 
-            if (empty($htmlContent)) {
-                echo "لم يتم تحميل محتوى الفئة رقم $categoryId<br>";
-                continue; // ننتقل للفئة التالية
+        $count = 0;
+        $crawler->filter('div.text-center')->each(function (Crawler $node) use (&$count) {
+            if ($node->filter('img')->count() && $node->filter('p')->count()) {
+                $imageUrl = $node->filter('img')->attr('src');
+                $text = $node->filter('p')->text();
+
+                try {
+                    $imageContents = file_get_contents($imageUrl);
+                    $imageName = basename($imageUrl);
+                    $path = 'categories/' . uniqid() . '_' . $imageName;
+                    Storage::disk('public')->put($path, $imageContents);
+                } catch (\Exception $e) {
+                    // تجاهل الخطأ أو تسجيله
+                    return;
+                }
+
+                MainCats::create([
+                    'title' => $text,
+                    'image' => $path,
+                ]);
+
+                $count++;
             }
+        });
 
-            $crawler = new Crawler($htmlContent);
-
-            try {
-                $title = $crawler->filter('.cat_title')->text();
-            } catch (\Exception $e) {
-                echo "لم يتم العثور على عنوان الفئة لـ category_id=$categoryId<br>";
-                continue; // ننتقل للفئة التالية
-            }
-
-            $cat = SubCategory::where('name', $title)->first();
-
-            if (!$cat) {
-                echo "لم يتم العثور على الفئة في قاعدة البيانات: $title<br>";
-                continue;
-            }
-
-            $subcategory_id = $cat->id;
-
-            echo "اسم الفئة: $title (ID: $subcategory_id) <br>";
-
-            $products = $crawler->filter('.productscats');
-
-            if ($products->count() > 0) {
-                $products->each(function ($node) use ($subcategory_id) {
-                    try {
-                        $productName = $node->filter('.productName')->text();
-                        $price = (int) $node->filter('.price_after')->text();
-                        $dicount = (int) $node->filter('.descount')->text();
-                        $desc = $node->filter('.detls')->text();
-                        $productImage = 'https://albayader-uae.store/' . $node->filter('.product-entry__image img')->attr('src');
-
-                        StoreProductData::dispatch([
-                            'name' => $productName,
-                            'image' => $productImage,
-                            'price' => $price,
-                            'discount_value' => $dicount,
-                            'description' => $desc,
-                        ], $subcategory_id);
-
-                        echo "تم إضافة منتج: $productName<br>";
-                    } catch (\Exception $e) {
-                        echo "خطأ أثناء معالجة منتج في الفئة ID: $subcategory_id<br>";
-                        // ممكن تسجيل الخطأ لو أردت
-                    }
-                });
-            } else {
-                echo "لم يتم العثور على منتجات للفئة: $title<br>";
-            }
-        } else {
-            echo "فشل تحميل الفئة ID: $categoryId<br>";
-        }
-
-        echo "<hr>"; // خط فاصل بين الفئات
+        return "Import completed successfully. Imported items: " . $count;
+    } else {
+        return "Failed to get content from the URL.";
     }
 }
 

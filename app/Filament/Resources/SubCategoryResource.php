@@ -11,6 +11,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextInputColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -71,6 +72,7 @@ class SubCategoryResource extends Resource
                 Forms\Components\Toggle::make('is_homepage')
                     ->label('عرض في الصفحة الرئيسية')
                     ->default(false),
+            
 
 
             ]);
@@ -90,6 +92,12 @@ class SubCategoryResource extends Resource
                     ->label('عرض في الصفحة الرئيسية')
                     ->onColor('success')
                     ->offColor('danger'),
+                 TextInputColumn::make('order')
+    ->label('الترتيب')
+    ->rules(['required', 'integer', 'min:1'])
+    ->sortable(),
+                    
+                    
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

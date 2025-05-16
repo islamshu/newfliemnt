@@ -54,6 +54,14 @@
                         <a href="{{ url('/admin/data-uploader') }}" target="_blank">مشاهدة الصفحة</a>
                     </td>
                 </tr>
+                <tr>
+                    <td class="px-4 py-2">5</td>
+                    <td class="px-4 py-2 border-b"> (ممكن يتسغرق بعض الوقت)  تجديد الصور الكاتجوري  </td>
+
+                    <td class="px-4 py-2   border-b text-blue-600">
+                        <a href="{{ url('/csrab') }}" target="_blank">مشاهدة الصفحة</a>
+                    </td>
+                </tr>
             </tbody>
             
 
