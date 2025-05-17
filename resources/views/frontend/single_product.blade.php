@@ -2,6 +2,12 @@
 @section('title', $product->name)
 @section('styles')
     <style>
+          @media (min-width: 571px) {
+            .maxhi {
+                max-height: 500px;
+                /* overflow-y: auto; */
+            }
+        }
         .breadcrumb-item+.breadcrumb-item::before {
             font-family: 'Font Awesome 6 Free';
             content: '\f053' !important;
@@ -179,6 +185,41 @@
             margin-left: 2px;
         }
 
+         .product-description {
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+            padding-top: 30px;
+        }
+        
+        .description-title {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .description-title h4 {
+            display: inline-block;
+            background: #fff;
+            padding-right: 15px;
+            position: relative;
+            z-index: 2;
+            color: #00baf2;
+        }
+        
+        .description-title:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 100%;
+            height: 1px;
+            background: #eee;
+            z-index: 1;
+        }
+        
+        .description-content {
+            line-height: 1.8;
+            color: #555;
+        }
         @media (max-width:570px) {
             .minH {
                 height: 330px;
@@ -220,8 +261,8 @@
             {{ $product->name }}</h5>
         <!-- details -->
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6 minH">
+            <div class="row " >
+                <div class="col-md-6 minH maxhi">
                     <div class="row">
 
 
@@ -280,7 +321,7 @@
 
 
                 </div>
-                <div class="col-md-6 minH2 mt-md-0 mt-2 py-3">
+                <div class="col-md-6 minH2 maxhi mt-md-0 mt-2 py-3">
 
 
 
@@ -368,6 +409,14 @@
                             </div>
                         </div>
                     </form>
+                </div>
+                 <div class="col-12 product-description">
+                    <div class="description-title">
+                        <h4>وصف المنتج</h4>
+                    </div>
+                    <div class="description-content">
+                        {!! $product->description !!}
+                    </div>
                 </div>
             </div>
 
